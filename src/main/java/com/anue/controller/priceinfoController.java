@@ -21,13 +21,14 @@ import com.anue.repository.priceinfoRepository;
 @RestController
 @RequestMapping("/priceinfoApi")
 public class priceinfoController {
-	@Autowired
-	 priceinfoRepository  priceinfoRepository;
 
-	@GetMapping("/priceinfo/all")
-	public List<priceinfo> getAllNotes() {
-		return priceinfoRepository.findAll();
+	private final priceinfoRepository  priceinfoRepository;
+	
+	@Autowired
+	public priceinfoController(priceinfoRepository  priceinfoRepository) {
+		this.priceinfoRepository = priceinfoRepository;
 	}
+	
 
 	
 	@GetMapping("/priceinfo")
@@ -48,8 +49,7 @@ public class priceinfoController {
 		
 		return  priceinfoRepository.findPriceinfo(stockcode,stockname,dealdate,dealtime,timeintervel);
 		
-//		return  priceinfoRepository.findPriceinfo1(stockcode);
-				
+
 	}
 	
 

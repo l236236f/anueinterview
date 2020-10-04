@@ -3,6 +3,9 @@ package com.anue.repository;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -10,8 +13,12 @@ import org.springframework.stereotype.Repository;
 import com.anue.entity.priceinfo;
 
 
+
+
 @Repository
 public interface priceinfoRepository extends JpaRepository<priceinfo,Long>,JpaSpecificationExecutor<priceinfo>{
+
+final ConcurrentMap<Long,priceinfo>  priceinfoRepository = new ConcurrentHashMap<>();
 
 @Query(nativeQuery = true,value=
 		"select order_id,stock_name,priceinfotable.stock_code,deal_date,deal_time,deal_price,deal_volume,priceinfotable.renew_time,priceinfotable.build_time "+
